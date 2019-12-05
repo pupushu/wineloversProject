@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="~{_shared/head}"/>
+<body>
+<th:block th:include="~{_shared/header-user}"/>
+<main>
+    <h1 class="text-center text-white">Edit wine</h1>
+    <hr class="hr-3"/>
+    <div class="container">
+        <form th:action="@{'/wines/edit-wine/' + ${wine.id}}" method="post">
+            <div class="border border-warning">
+                <h3 class="text-center text-white">Wine Info</h3>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group">
+                            <div class="label-holder textCol d-flex justify-content-center">
+                                <label for="countryOfOrigin" class="h4 mb-2 text-white">Country of origin</label>
+                            </div>
+                            <input th:value="${wine.countryOfOrigin}" type="text" class="form-control" id="countryOfOrigin" name="countryOfOrigin"/>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <div class="label-holder textCol d-flex justify-content-center">
+                                <label for="name" class="h4 mb-2 text-white">Name</label>
+                            </div>
+                            <input th:value="${wine.name}" type="text" class="form-control" id="name" name="name"/>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <div class="label-holder text-white textCol d-flex justify-content-center">
+                                <label for="picture" class="h4 mb-2">Picture URL</label>
+                            </div>
+                            <input th:value="${wine.picture}" type="text" class="form-control" id="picture" name="picture"/>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <div class="label-holder text-white textCol d-flex justify-content-center">
+                                <label for="price" class="h4 mb-2">Price</label>
+                            </div>
+                            <input th:value="${wine.price}" type="number" class="form-control" id="price" name="price" step=".1"/>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <div class="label-holder text-white textCol d-flex justify-content-center">
+                                <label for="producer" class="h4 mb-2">Producer</label>
+                            </div>
+                            <input th:value="${wine.producer}" type="text" class="form-control" id="producer" name="producer"/>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <div class="label-holder text-white textCol d-flex justify-content-center">
+                                <label for="variety" class="h4 mb-2">Variety</label>
+                            </div>
+                            <input th:value="${wine.variety}" type="text" class="form-control" id="variety" name="variety"/>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <div class="label-holder text-white textCol d-flex justify-content-center">
+                                <label for="variety" class="h4 mb-2">Wine Type</label>
+                            </div>
+                            <select class="form-control" name="wineType" id="wineType">
+                                <option value="please-select" selected="selected" disabled="disabled">Please choose
+                                </option>
+                                <option th:each="wineType : ${T(softuni.winelovers.data.models.wine.WineType).values()}"
+                                        th:value="${wineType}" th:text="${wineType}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <div class="label-holder text-white textCol d-flex justify-content-center">
+                                <label for="year" class="h4 mb-2">Year</label>
+                            </div>
+                            <input th:value="${wine.year}" type="number" class="form-control" id="year" name="year"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border border-warning">
+                <h3 class="text-center text-white">Wine Notes</h3>
+                <div class="label-holder text-white textCol d-flex justify-content-center">
+                    <label th:type="hidden" for="id" class="h4 mb-2">id</label>
+                </div>
+                <input th:type="hidden" th:value="${wine.wineNote.id}" type="text" class="form-control" id="id" name="id"/>
+                <div class="row">
+                    <div class="col-10 offset-1">
+                        <div class="form-group">
+                            <div class="label-holder textCol d-flex justify-content-center">
+                                <label for="color" class="h4 mb-2 text-white">Color</label>
+                            </div>
+                            <textarea th:text="${wine.wineNote.color}" rows="2" type="text" class="form-control" id="color" name="color" placeholder="Color"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-10 offset-1">
+                        <div class="form-group">
+                            <div class="label-holder textCol d-flex justify-content-center">
+                                <label for="noseNotes" class="h4 mb-2 text-white">Nose</label>
+                            </div>
+                            <textarea th:text="${wine.wineNote.noseNotes}" rows="4" type="text" class="form-control" id="noseNotes" name="noseNotes" placeholder="Nose notes"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-10 offset-1">
+                        <div class="form-group">
+                            <div class="label-holder textCol d-flex justify-content-center">
+                                <label for="tasteNotes" class="h4 mb-2 text-white">Taste</label>
+                            </div>
+                            <textarea th:text="${wine.wineNote.tasteNotes}" rows="4" type="text" class="form-control" id="tasteNotes" name="tasteNotes" placeholder="Taste notes"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form class="mx-auto w-15" th:action="@{'/wines/edit-wine/' + ${wine.id}}" method="post">
+                <div class="button-holder d-flex justify-content-center">
+                    <button class="btn btn-outline-warning text-white mb-3" type="submit">Edit wine</button>
+                </div>
+            </form>
+        </form>
+    </div>
+</main>
+<th:block th:include="~{_shared/footer}"/>

@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="~{_shared/head}"/>
+<body>
+<th:block th:include="~{_shared/header-user}"/>
+<main>
+    <div class="container white-text text-center">
+        <h1>Welcome to Wine Lovers Club</h1>
+        <hr class="my-3"/>
+    </div>
+
+    <div class="text-center mb-3 justify-content-md-around">
+        <h4 class="text-white mt-2">Welcome, [[${session.user.username}]]</h4>
+    </div>
+</main>
+<th:block th:include="~{_shared/footer}"/>
+</body>
+</html>

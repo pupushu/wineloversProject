@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="~{_shared/head}"/>
+<body>
+<th:block th:include="~{_shared/header-user}"/>
+<main>
+    <h1 class="text-center text-white">Add Shop</h1>
+    <hr class="hr-3"/>
+    <form class="mx-auto w-15" th:action="@{/shops/add-shop}" method="post">
+        <div class="form-group">
+            <div class="label-holder textCol d-flex justify-content-center">
+                <label for="name" class="h4 mb-2 text-white">Shop's name</label>
+            </div>
+            <input type="text" class="form-control" id="name" name="name"/>
+        </div>
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="country" class="h4 mb-2">Country</label>
+            </div>
+            <input type="text" class="form-control" id="country" name="country"/>
+        </div>
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="city" class="h4 mb-2">City</label>
+            </div>
+            <input type="text" class="form-control" id="city" name="city"/>
+        </div>
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="street" class="h4 mb-2">Street</label>
+            </div>
+            <input type="text" class="form-control" id="street" name="street"/>
+        </div>
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="number" class="h4 mb-2">Street number</label>
+            </div>
+            <input type="text" class="form-control" id="number" name="number"/>
+        </div>
+        <div class="button-holder d-flex justify-content-center">
+            <button class="btn btn-info text-white mb-3" type="submit">Create shop</button>
+        </div>
+    </form>
+</main>
+<th:block th:include="~{_shared/footer}"/>

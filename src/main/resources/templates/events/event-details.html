@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="~{_shared/head}"/>
+<body>
+<th:block th:include="~{_shared/header-user}"/>
+<main>
+    <div class="container">
+        <h1 class="text-center text-white"></h1>
+        <hr class="hr-3"/>
+        <div class="well">
+            <div class="media">
+                <div class="media-body">
+                    <h4 class="media-heading text-white">[[${event.title}]]</h4>
+                    <p class="card-text font-weight-bold text-white">
+                        From:
+                        [[${#dates.format(event.startDate, 'dd-MMM-yy')}]]
+                        [[${#dates.dayOfWeekNameShort(event.StartDate)}]]
+                        to:
+                        [[${#dates.format(event.endDate, 'dd-MMM-yy')}]]
+                        [[${#dates.dayOfWeekNameShort(event.endDate)}]]
+                    </p>
+                    <h2 class="card-text text-white">Price: [[${event.price}]]</h2>
+                    <th th:each="address :${event.address}">
+                        <div class="card-text text-white">
+                            <p>@ [[${address.street}]] [[${address.number}]],
+                                [[${address.city}]], [[${address.country}]]</p>
+                        </div>
+                    </th>
+                    <p class="text-white">[[${event.content}]]</p>
+
+                </div>
+            </div>
+            <form class="mx-auto w-15" th:action="@{/events/all-events}" method="get">
+                <div class="button-holder d-flex justify-content-center">
+                    <button class="btn btn-outline-info text-white mb-3" type="submit">Back to events</button>
+                </div>
+            </form>
+            <th:block th:if="${session.role == 'ADMIN'}">
+                <form class="mx-auto w-15" th:action="@{'/events/edit-event/' + ${event.id}}" method="get">
+                    <div class="button-holder d-flex justify-content-center">
+                        <button class="btn btn-outline-warning text-white mb-3" type="submit">Edit event</button>
+                    </div>
+                </form>
+            </th:block>
+        </div>
+    </div>
+</main>
+<th:block th:include="~{_shared/footer}"/>

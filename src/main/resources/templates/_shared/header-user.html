@@ -1,0 +1,68 @@
+<
+<header>
+    <nav class="navbar navbar-expand-lg ">
+        <a class="navbar-brand text-white h4" href="/">Wine Lovers</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNav">
+            <ul class="navbar-nav row">
+                <th:block th:if="${session.role == 'USER' || session.role == null || session == null}">
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/home">My Wines</a>
+                    </li>
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/wines/all-wines">Our Wines</a>
+                    </li>
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/news/all-news">News</a>
+                    </li>
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/events/all-events">Events</a>
+                    </li>
+                    </li>
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/users/profile">Profile</a>
+                    </li>
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/users/logout">Logout</a>
+                    </li>
+                </th:block>
+                <th:block th:unless="${session.role == 'USER'|| session.role == null || session == null}">
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/wines/add-wine">Add Wine</a>
+                    </li>
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/wines/all-wines">Our Wines</a>
+                    </li>
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/news/create-news">Add News</a>
+                    </li>
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/news/all-news">News</a>
+                    </li>
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/events/create-event">Add Event</a>
+                    </li>
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/events/all-events">Events</a>
+                    </li>
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/shops/add-shop">Add Shop</a>
+                    </li>
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/shops/all-shops">Our Shops</a>
+                    </li>
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/users/profile">Profile</a>
+                    </li>
+                    <li class="nav-item col-md-2">
+                        <a class="nav-link text-white active h7" href="/users/logout">Logout</a>
+                    </li>
+                </th:block>
+            </ul>
+        </div>
+    </nav>
+</header>
