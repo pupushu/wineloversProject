@@ -115,4 +115,8 @@ public class User extends BaseEntity {
         this.wines = wines;
     }
 
+    public void addWine(Wine wine){
+        this.wines.add(wine);
+    }
+
 }

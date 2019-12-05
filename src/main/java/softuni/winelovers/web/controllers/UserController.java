@@ -90,4 +90,11 @@ public class UserController {
         System.out.println();
         return "redirect:/users/profile";
     }
+
+    @PostMapping("add-wine/{id}")
+    public void addWineToUser(@PathVariable String id,
+                              HttpSession session){
+        UserLoginServiceModel user = (UserLoginServiceModel) session.getAttribute("user");
+        this.userService.addWineToUser(id, user.getUsername());
+    }
 }

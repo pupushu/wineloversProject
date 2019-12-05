@@ -17,4 +17,6 @@ public interface UserService {
     UserProfileServiceModel getProfile(String username);
 
     void changePassword(String username, String oldPassword, String newPassword, String confirmNewPassword) throws Exception;
+
+    void addWineToUser(String wineId, String username);
 }

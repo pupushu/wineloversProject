@@ -6,9 +6,9 @@
 <main>
     <h1 class="text-center text-white">All wines</h1>
     <hr class="hr-3"/>
-    <div class="row">
+    <div class="row justify-content-center">
         <tr th:each="wine: ${wines}">
-                <div class="card text-white bg-transparent col-md-3 offset-md-2 custom-bottom-margin">
+                <div class="card text-white bg-transparent col-2 offset-1 custom-bottom-margin">
                     <img class="card-img-top" th:src="${wine.picture}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">Name: [[${wine.name}]], by [[${wine.producer}]]</h5>

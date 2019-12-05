@@ -8,7 +8,6 @@ import java.util.List;
 public class UserProfileModel {
     private String username;
     private Date dateRegistered;
-    private List<WineNote> wineNotes;
     private String email;
 
     public UserProfileModel() {
@@ -30,24 +29,12 @@ public class UserProfileModel {
         this.dateRegistered = dateRegistered;
     }
 
-    public List<WineNote> getWineNotes() {
-        return wineNotes;
-    }
-
-    public void setWineNotes(List<WineNote> wineNotes) {
-        this.wineNotes = wineNotes;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Integer getWinesCount() {
-        return wineNotes.size();
     }
 
 }

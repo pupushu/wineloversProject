@@ -4,7 +4,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import softuni.winelovers.data.models.user.User;
+import softuni.winelovers.data.models.wine.Wine;
 import softuni.winelovers.data.repositories.user.UserRepository;
+import softuni.winelovers.data.repositories.wine.WineRepository;
 import softuni.winelovers.service.factories.UserFactory;
 import softuni.winelovers.service.models.user.UserLoginServiceModel;
 import softuni.winelovers.service.models.user.UserProfileServiceModel;
@@ -24,14 +26,16 @@ public class UserServiceImpl implements UserService {
     private final EmailService emailService;
     private final HashingService hashingService;
     private final ModelMapper modelMapper;
+    private final WineRepository wineRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, HashingService hashingService, UserFactory userFactory, EmailService emailService, HashingService hashingService1, ModelMapper modelMapper1) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, HashingService hashingService, UserFactory userFactory, EmailService emailService, HashingService hashingService1, ModelMapper modelMapper1, WineRepository wineRepository) {
         this.userRepository = userRepository;
         this.emailService = emailService;
         this.userFactory = userFactory;
         this.hashingService = hashingService1;
         this.modelMapper = modelMapper1;
+        this.wineRepository = wineRepository;
     }
 
     @Override
@@ -82,6 +86,15 @@ public class UserServiceImpl implements UserService {
         String hashedNewPassword = this.hashingService.hash(newPassword);
         User user = getUser.get();
         user.setPassword(hashedNewPassword);
+        this.userRepository.save(user);
+    }
+
+    @Override
+    public void addWineToUser(String wineId, String username) {
+        User user = this.userRepository.findByUsername(username).get();
+        Wine wine = this.wineRepository.findById(wineId).get();
+
+        user.addWine(wine);
         this.userRepository.save(user);
     }
 
