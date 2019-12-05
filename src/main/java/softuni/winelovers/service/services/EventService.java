@@ -19,4 +19,6 @@ public interface EventService {
     List<GetEventModelService> getAllEvents();
 
     GetEventModelService findById(String id) throws Exception;
+
+    void updateEvent(GetEventModelService event) throws Exception;
 }

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import softuni.winelovers.data.models.shop.Address;
+import softuni.winelovers.service.models.addresses.GetAddressModelService;
+import softuni.winelovers.service.models.events.GetEventModelService;
 import softuni.winelovers.service.services.AddressService;
 import softuni.winelovers.service.services.EventService;
 import softuni.winelovers.service.services.ShopService;
@@ -15,10 +18,12 @@ import softuni.winelovers.web.models.addresses.GetAddressModel;
 import softuni.winelovers.web.models.events.CreateEventModel;
 import softuni.winelovers.web.models.events.CreateEventWithoutAddressModel;
 import softuni.winelovers.web.models.events.GetEventModel;
+import softuni.winelovers.web.models.events.UpdateEventModel;
 import softuni.winelovers.web.models.shop.GetShopModel;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +44,7 @@ public class EventController {
     }
 
     @GetMapping("/create-event")
-    public String getCreateEvent(Model model){
+    public String getCreateEvent(Model model) {
         List<GetShopModel> shops = this.shopService.findAll()
                 .stream()
                 .map(shop -> this.modelMapper.map(shop, GetShopModel.class))
@@ -52,12 +57,12 @@ public class EventController {
     public String createEvent(@ModelAttribute CreateEventModel eventModel,
                               @ModelAttribute CreateAddressModel addressModel,
                               @RequestParam(value = "shopCheckbox", required = false) List<String> address) throws ParseException {
-        if (address == null){
+        if (address == null) {
             List<CreateAddressModel> newAddress = new ArrayList<>();
             newAddress.add(addressModel);
             eventModel.setAddress(newAddress);
             this.eventService.createEvent(eventModel);
-        }else {
+        } else {
             List<GetAddressModel> addresses = address.stream()
                     .map(ad -> {
                         try {
@@ -76,7 +81,7 @@ public class EventController {
     }
 
     @GetMapping("/all-events")
-    public String getEvents(Model model){
+    public String getEvents(Model model) {
         List<GetEventModel> events = this.eventService.getAllEvents()
                 .stream()
                 .map(e -> this.modelMapper.map(e, GetEventModel.class))
@@ -109,4 +114,35 @@ public class EventController {
         modelAndView.setViewName("/events/edit-event.html");
         return modelAndView;
     }
+
+    @PostMapping("/edit-event/{id}")
+    public String editEvent(@PathVariable String id,
+                            @ModelAttribute CreateAddressModel addressModel,
+                            @ModelAttribute GetAddressModel getAddressModel,
+                            @ModelAttribute UpdateEventModel eventModel,
+                            @RequestParam(value = "shopCheckbox", required = false) List<String> address) throws Exception {
+
+        if (address == null) {
+            eventModel.setAddress(Arrays.asList(this.modelMapper.map(addressModel, GetAddressModel.class)));
+        } else {
+            List<GetAddressModel> addresses = address
+                    .stream()
+                    .map(ad -> {
+                        try {
+
+                            GetAddressModelService adrs = this.addressService.getAddressWithId(ad);
+                            GetAddressModel adrr = this.modelMapper.map(adrs, GetAddressModel.class);
+                            return adrr;
+                        } catch (Exception e) {
+                            return null;
+                        }
+                    })
+                    .collect(Collectors.toList());
+            eventModel.setAddress(addresses);
+        }
+
+        this.eventService.updateEvent(this.modelMapper.map(eventModel, GetEventModelService.class));
+        return "events/all-events.html";
+    }
 }
+

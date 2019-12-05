@@ -76,4 +76,9 @@ public class EventServiceImpl implements EventService {
             throw new Exception("Event not found");
         }
     }
+
+    @Override
+    public void updateEvent(GetEventModelService event) throws Exception {
+        this.eventRepository.save(this.modelMapper.map(event, Event.class));
+    }
 }

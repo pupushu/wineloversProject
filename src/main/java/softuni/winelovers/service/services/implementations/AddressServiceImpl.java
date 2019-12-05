@@ -8,6 +8,7 @@ import softuni.winelovers.service.models.addresses.CreateAddressModelService;
 import softuni.winelovers.service.models.addresses.GetAddressModelService;
 import softuni.winelovers.service.models.events.GetEventModelService;
 import softuni.winelovers.service.services.AddressService;
+import softuni.winelovers.web.models.addresses.GetAddressModel;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +51,11 @@ public class AddressServiceImpl implements AddressService {
         return this.addressRepository.findAll().stream()
                 .map(a -> this.modelMapper.map(a, GetAddressModelService.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public GetAddressModelService getAddressWithId(String id) {
+        return this.modelMapper.map(this.addressRepository.findById(id).get(), GetAddressModelService.class);
     }
 
     private boolean dataContainAddress(Address address) {

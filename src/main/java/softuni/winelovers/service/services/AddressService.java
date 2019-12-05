@@ -4,6 +4,7 @@ import softuni.winelovers.data.models.shop.Address;
 import softuni.winelovers.service.models.addresses.CreateAddressModelService;
 import softuni.winelovers.service.models.addresses.GetAddressModelService;
 import softuni.winelovers.web.models.addresses.CreateAddressModel;
+import softuni.winelovers.web.models.addresses.GetAddressModel;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface AddressService {
     CreateAddressModelService findById(String id) throws Exception;
 
     List<GetAddressModelService> findAll();
+
+    GetAddressModelService getAddressWithId(String id);
 }
