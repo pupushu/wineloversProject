@@ -4,6 +4,7 @@ import softuni.winelovers.data.models.base.BaseEntity;
 import softuni.winelovers.data.models.wine.Wine;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,7 @@ public class Shop extends BaseEntity {
     private List<Wine> wineList;
 
     public Shop() {
+        this.wineList = new ArrayList<>();
     }
 
     public String getName() {
@@ -42,5 +44,9 @@ public class Shop extends BaseEntity {
 
     public void setWineList(List<Wine> wineList) {
         this.wineList = wineList;
+    }
+
+    public void addWine(Wine wine){
+        this.wineList.add(wine);
     }
 }

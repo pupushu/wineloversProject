@@ -2,6 +2,7 @@ package softuni.winelovers.service.services;
 
 import softuni.winelovers.data.models.wine.Wine;
 import softuni.winelovers.service.models.wines.CreateWineModelService;
+import softuni.winelovers.service.models.wines.GetWineNoteModelService;
 import softuni.winelovers.service.models.wines.GetWinesModelService;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface WineService {
 
     List<GetWinesModelService> getAll();
 
-    Wine findById(String id) throws Exception;
+    GetWinesModelService findById(String id) throws Exception;
 
-    void update(Wine wine);
+    void update(GetWinesModelService wine);
 }

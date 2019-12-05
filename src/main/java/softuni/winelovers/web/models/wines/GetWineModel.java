@@ -4,6 +4,7 @@ import softuni.winelovers.data.models.shop.Shop;
 import softuni.winelovers.data.models.user.User;
 import softuni.winelovers.data.models.wine.WineNote;
 import softuni.winelovers.data.models.wine.WineType;
+import softuni.winelovers.web.models.shop.GetShopModel;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,9 +19,8 @@ public class GetWineModel {
     private BigDecimal price;
     private WineType wineType;
     private String picture;
-    private WineNote wineNote;
-    private List<User> drinkers;
-    private List<Shop> whereToBuy;
+    private GetWineNoteModel wineNote;
+    private List<GetShopModel> whereToBuy;
 
     public GetWineModel() {
     }
@@ -97,27 +97,19 @@ public class GetWineModel {
         this.picture = picture;
     }
 
-    public WineNote getWineNote() {
+    public GetWineNoteModel getWineNote() {
         return wineNote;
     }
 
-    public void setWineNote(WineNote wineNote) {
+    public void setWineNote(GetWineNoteModel wineNote) {
         this.wineNote = wineNote;
     }
 
-    public List<User> getDrinkers() {
-        return drinkers;
-    }
-
-    public void setDrinkers(List<User> drinkers) {
-        this.drinkers = drinkers;
-    }
-
-    public List<Shop> getWhereToBuy() {
+    public List<GetShopModel> getWhereToBuy() {
         return whereToBuy;
     }
 
-    public void setWhereToBuy(List<Shop> whereToBuy) {
+    public void setWhereToBuy(List<GetShopModel> whereToBuy) {
         this.whereToBuy = whereToBuy;
     }
 }

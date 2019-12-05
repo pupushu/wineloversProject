@@ -11,6 +11,8 @@ import softuni.winelovers.data.models.wine.Wine;
 import softuni.winelovers.data.models.wine.WineNote;
 import softuni.winelovers.service.models.user.UserLoginServiceModel;
 import softuni.winelovers.service.models.wines.CreateWineModelService;
+import softuni.winelovers.service.models.wines.GetWineNoteModelService;
+import softuni.winelovers.service.models.wines.GetWinesModelService;
 import softuni.winelovers.service.services.ShopService;
 import softuni.winelovers.service.services.WineService;
 import softuni.winelovers.web.models.news.NewsCreateModel;
@@ -19,6 +21,7 @@ import softuni.winelovers.web.models.users.LoginUserModel;
 import softuni.winelovers.web.models.wines.CreateWineModel;
 import softuni.winelovers.web.models.wines.CreateWineWineNotesModel;
 import softuni.winelovers.web.models.wines.GetWineModel;
+import softuni.winelovers.web.models.wines.GetWineNoteModel;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -71,7 +74,7 @@ public class WineController {
     public ModelAndView getNewsDetails(@PathVariable String id, ModelAndView modelAndView,
                                        HttpSession session){
         try {
-            Wine toDisplay = this.wineService.findById(id);
+            GetWineModel toDisplay = this.modelMapper.map(this.wineService.findById(id), GetWineModel.class);
             modelAndView.addObject("wine", toDisplay);
             modelAndView.setViewName("wines/wine-details.html");
             return modelAndView;
@@ -83,21 +86,39 @@ public class WineController {
 
     @GetMapping("/edit-wine/{id}")
     public String getEditWine(@PathVariable String id,
-                              @ModelAttribute GetWineModel getWineModel,
                               Model model) throws Exception {
-        Wine wine = this.wineService.findById(id);
+        GetWineModel wine = this.modelMapper.map(this.wineService.findById(id), GetWineModel.class);
+        List<GetShopModel> shopsNotSelected = this.shopService.findAll().stream()
+                .map(sh -> this.modelMapper.map(sh, GetShopModel.class))
+                .filter(shopModel -> {
+                    List<String> shopIds = wine.getWhereToBuy().stream().map(GetShopModel::getId).collect(Collectors.toList());
+                    return !shopIds.contains(shopModel.getId());
+                }).collect(Collectors.toList());
         model.addAttribute("wine", this.modelMapper.map(wine, GetWineModel.class));
+        model.addAttribute("shopsNotSelected", shopsNotSelected);
         return "wines/edit-wine";
     }
 
     @PostMapping("/edit-wine/{id}")
     public String editWine(@PathVariable String id,
                            @ModelAttribute GetWineModel wineModel,
-                           @ModelAttribute WineNote noteModel) throws Exception {
-       Wine wine = this.modelMapper.map(wineModel, Wine.class);
+                           @ModelAttribute GetWineNoteModel noteModel,
+                           @RequestParam(value = "shopCheckbox", required = false) List<String> address) throws Exception {
+       GetWineModel wine = this.modelMapper.map(wineModel, GetWineModel.class);
+       List<GetShopModel> shops = address.stream()
+               .map(a -> {
+                   try {
+                       return this.modelMapper.map(this.shopService.findById(a), GetShopModel.class);
+                   } catch (Exception e) {
+                       return null;
+                   }
+               }).collect(Collectors.toList());
+       noteModel.setWine(wine);
        wine.setWineNote(noteModel);
-       wine.setId(id);
-       this.wineService.update(wine);
+       wine.setWhereToBuy(shops);
+        wine.setId(id);
+        System.out.println();
+       this.wineService.update(this.modelMapper.map(wine, GetWinesModelService.class));
         return "wines/all-wines";
     }
 }

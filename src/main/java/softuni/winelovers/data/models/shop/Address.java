@@ -26,7 +26,6 @@ public class Address extends BaseEntity {
     @ManyToMany(mappedBy = "eventAddress")
     private List<Event> events;
 
-    // i tuk li e sashtia mapping??? Tova e dosta stranno
     @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
     private Shop shop;
 

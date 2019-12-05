@@ -65,10 +65,9 @@
                                 <label for="variety" class="h4 mb-2">Wine Type</label>
                             </div>
                             <select class="form-control" name="wineType" id="wineType">
-                                <option value="please-select" selected="selected" disabled="disabled">Please choose
                                 </option>
                                 <option th:each="wineType : ${T(softuni.winelovers.data.models.wine.WineType).values()}"
-                                        th:value="${wineType}" th:text="${wineType}"></option>
+                                       th:selected="${wine.wineType} == ${wineType} ? true : false" th:value="${wineType}" th:text="${wineType}"></option>
                             </select>
                         </div>
                     </div>
@@ -80,6 +79,31 @@
                             <input th:value="${wine.year}" type="number" class="form-control" id="year" name="year"/>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="border border-warning">
+                <h3 class="text-center text-white">Shops to be supplied</h3>
+                <div class="row">
+                    <th th:each="shop :${wine.whereToBuy}">
+                        <div class="col-3">
+                            <label>
+                                <input class="text-center" th:id="${shop.name}" th:checked="checked" type="checkbox" th:name="shopCheckbox"
+                                       th:value="${shop.id}"
+                                       th:title="${shop.id}">
+                                <label class="text-white" th:for="${shop.name}">[[${shop.name}]]</label>
+                            </label>
+                        </div>
+                    </th>
+                    <th th:each="shop :${shopsNotSelected}">
+                        <div class="col-3">
+                            <label>
+                                <input class="text-center" th:id="${shop.name}" type="checkbox" th:name="shopCheckbox"
+                                       th:value="${shop.id}"
+                                       th:title="${shop.id}">
+                                <label class="text-white" th:for="${shop.name}">[[${shop.name}]]</label>
+                            </label>
+                        </div>
+                    </th>
                 </div>
             </div>
             <div class="border border-warning">
