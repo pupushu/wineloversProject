@@ -15,6 +15,7 @@ public class CreateWineModel {
     private String picture;
     private CreateWineWineNotesModel wineNotes;
 
+
     public CreateWineModel() {
     }
 

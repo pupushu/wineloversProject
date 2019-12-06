@@ -21,6 +21,7 @@ public class GetWineModel {
     private String picture;
     private GetWineNoteModel wineNote;
     private List<GetShopModel> whereToBuy;
+    private List<GetWineCommentModel> comments;
 
     public GetWineModel() {
     }
@@ -112,4 +113,13 @@ public class GetWineModel {
     public void setWhereToBuy(List<GetShopModel> whereToBuy) {
         this.whereToBuy = whereToBuy;
     }
+
+    public List<GetWineCommentModel> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<GetWineCommentModel> comments) {
+        this.comments = comments;
+    }
+
 }

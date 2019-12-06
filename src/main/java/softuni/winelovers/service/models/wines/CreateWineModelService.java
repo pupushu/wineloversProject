@@ -1,9 +1,12 @@
 package softuni.winelovers.service.models.wines;
 
+import net.bytebuddy.agent.builder.AgentBuilder;
 import softuni.winelovers.data.models.wine.WineType;
+import softuni.winelovers.web.models.wines.CreateWineCommentModel;
 import softuni.winelovers.web.models.wines.CreateWineWineNotesModel;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class CreateWineModelService {
     private String name;
@@ -15,6 +18,7 @@ public class CreateWineModelService {
     private WineType wineType;
     private String picture;
     private CreateWineWineNotesModel wineNotes;
+    private List<CreateWineCommentModel> comments;
 
     public CreateWineModelService() {
     }
@@ -89,5 +93,13 @@ public class CreateWineModelService {
 
     public void setWineNotes(CreateWineWineNotesModel wineNotes) {
         this.wineNotes = wineNotes;
+    }
+
+    public List<CreateWineCommentModel> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CreateWineCommentModel> comments) {
+        this.comments = comments;
     }
 }

@@ -6,6 +6,7 @@ import softuni.winelovers.data.models.user.User;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -51,8 +52,6 @@ public class Wine extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "shop_id"))
     private List<Shop> whereToBuy;
 
-    @OneToMany(mappedBy = "wine")
-    private List<WineComments> comments;
 
     public Wine() {
     }
@@ -145,11 +144,4 @@ public class Wine extends BaseEntity {
         this.drinkers = drinkers;
     }
 
-    public List<WineComments> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<WineComments> comments) {
-        this.comments = comments;
-    }
 }

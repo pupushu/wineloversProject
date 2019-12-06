@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "wine_comments")
-public class WineComments extends BaseEntity {
+public class WineComment extends BaseEntity {
 
     @Column(name = "nose_points")
     private double nosePoints;
@@ -19,15 +19,14 @@ public class WineComments extends BaseEntity {
     @Column(name = "comment", columnDefinition = "TEXT")
     private String comment;
 
-    @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name="wine_id", nullable=false)
-    private Wine wine;
+    @Column(name = "wine_id")
+    private String wineId;
 
-    public WineComments() {
+    public WineComment() {
     }
 
     public double getNosePoints() {
@@ -62,11 +61,11 @@ public class WineComments extends BaseEntity {
         this.user = user;
     }
 
-    public Wine getWine() {
-        return wine;
+    public String getWineId() {
+        return wineId;
     }
 
-    public void setWine(Wine wine) {
-        this.wine = wine;
+    public void setWineId(String wineId) {
+        this.wineId = wineId;
     }
 }

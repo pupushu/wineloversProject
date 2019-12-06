@@ -20,7 +20,12 @@
                     </p>
                     <form class="mx-auto w-15" th:action="@{'/wines/wine-details/' + ${wine.id}}" method="get">
                         <div class="button-holder d-flex justify-content-center">
-                            <button class="btn btn-info text-white mb-3" type="submit">More details</button>
+                            <button class="btn btn-outline-info text-white mb-3" type="submit">More details</button>
+                        </div>
+                    </form>
+                    <form class="mx-auto w-15" th:action="@{'/wines/wine-comments/' + ${wine.id}}" method="get">
+                        <div class="button-holder d-flex justify-content-center">
+                            <button class="btn btn-outline-info text-white mb-3" type="submit">Add comment</button>
                         </div>
                     </form>
                 </div>
