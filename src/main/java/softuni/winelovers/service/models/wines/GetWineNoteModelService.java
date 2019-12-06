@@ -5,7 +5,7 @@ public class GetWineNoteModelService {
     private String tasteNotes;
     private String noseNotes;
     private String color;
-    private GetWinesModelService wine;
+    private GetWineModelService wine;
 
     public GetWineNoteModelService() {
     }
@@ -42,11 +42,11 @@ public class GetWineNoteModelService {
         this.color = color;
     }
 
-    public GetWinesModelService getWine() {
+    public GetWineModelService getWine() {
         return wine;
     }
 
-    public void setWine(GetWinesModelService wine) {
+    public void setWine(GetWineModelService wine) {
         this.wine = wine;
     }
 }

@@ -9,7 +9,7 @@ import softuni.winelovers.service.models.shops.GetShopModelService;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class GetWinesModelService {
+public class GetWineModelService {
     private String id;
     private String name;
     private String producer;
@@ -22,7 +22,7 @@ public class GetWinesModelService {
     private GetWineNoteModelService wineNote;
     private List<GetShopModelService> whereToBuy;
 
-    public GetWinesModelService() {
+    public GetWineModelService() {
     }
 
     public String getId() {

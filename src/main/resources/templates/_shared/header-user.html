@@ -11,7 +11,7 @@
             <ul class="navbar-nav row">
                 <th:block th:if="${session.role == 'USER' || session.role == null || session == null}">
                     <li class="nav-item col-md-2">
-                        <a class="nav-link text-white active h7" href="/home">My Wines</a>
+                        <a class="nav-link text-white active h7" href="/users/my-wines">My Wines</a>
                     </li>
                     <li class="nav-item col-md-2">
                         <a class="nav-link text-white active h7" href="/wines/all-wines">Our Wines</a>

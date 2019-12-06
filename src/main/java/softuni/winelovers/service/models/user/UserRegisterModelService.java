@@ -1,12 +1,12 @@
 package softuni.winelovers.service.models.user;
 
-public class UserRegisterServiceModel {
+public class UserRegisterModelService {
     private String username;
     private String email;
     private String password;
     private String confirmPassword;
 
-    public UserRegisterServiceModel() {
+    public UserRegisterModelService() {
     }
 
     public String getUsername() {

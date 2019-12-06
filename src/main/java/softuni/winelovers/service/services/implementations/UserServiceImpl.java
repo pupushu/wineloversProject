@@ -8,9 +8,9 @@ import softuni.winelovers.data.models.wine.Wine;
 import softuni.winelovers.data.repositories.user.UserRepository;
 import softuni.winelovers.data.repositories.wine.WineRepository;
 import softuni.winelovers.service.factories.UserFactory;
-import softuni.winelovers.service.models.user.UserLoginServiceModel;
-import softuni.winelovers.service.models.user.UserProfileServiceModel;
-import softuni.winelovers.service.models.user.UserRegisterServiceModel;
+import softuni.winelovers.service.models.user.UserLoginModelService;
+import softuni.winelovers.service.models.user.UserProfileModelService;
+import softuni.winelovers.service.models.user.UserRegisterModelService;
 import softuni.winelovers.service.services.EmailService;
 import softuni.winelovers.service.services.HashingService;
 import softuni.winelovers.service.services.UserService;
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void register(UserRegisterServiceModel model) throws MessagingException {
+    public void register(UserRegisterModelService model) throws MessagingException {
        User user = userFactory.create(model.getUsername(), model.getEmail(), model.getPassword());
        this.userRepository.save(user);
        this.emailService.sendSimpleMsg(user.getEmail(), "Confirm registration", user.getMailConfirmationCode());
@@ -57,20 +57,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserLoginServiceModel login(LoginUserModel model) throws Exception {
+    public UserLoginModelService login(LoginUserModel model) throws Exception {
         String passwordHash = this.hashingService.hash(model.getPassword());
         Optional<User> user = this.userRepository.findByUsernameAndPassword(model.getUsername(), passwordHash);
         if(user == null){
             throw new Exception("Invalid user");
         }
         User found = user.get();
-        UserLoginServiceModel loginUser = this.modelMapper.map(found, UserLoginServiceModel.class);
+        UserLoginModelService loginUser = this.modelMapper.map(found, UserLoginModelService.class);
         return loginUser;
     }
 
     @Override
-    public UserProfileServiceModel getProfile(String username) {
-        return this.modelMapper.map(this.userRepository.findByUsername(username).get(), UserProfileServiceModel.class);
+    public UserProfileModelService getProfile(String username) {
+        return this.modelMapper.map(this.userRepository.findByUsername(username).get(), UserProfileModelService.class);
     }
 
     @Override

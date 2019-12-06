@@ -1,6 +1,7 @@
 package softuni.winelovers.web.models.users;
 
 import softuni.winelovers.data.models.wine.WineNote;
+import softuni.winelovers.web.models.wines.GetWineModel;
 
 import java.util.Date;
 import java.util.List;
@@ -9,6 +10,7 @@ public class UserProfileModel {
     private String username;
     private Date dateRegistered;
     private String email;
+    private List<GetWineModel> wines;
 
     public UserProfileModel() {
     }
@@ -37,4 +39,11 @@ public class UserProfileModel {
         this.email = email;
     }
 
+    public List<GetWineModel> getWines() {
+        return wines;
+    }
+
+    public void setWines(List<GetWineModel> wines) {
+        this.wines = wines;
+    }
 }

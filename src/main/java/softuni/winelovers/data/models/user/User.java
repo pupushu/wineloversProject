@@ -3,6 +3,7 @@ package softuni.winelovers.data.models.user;
 import org.hibernate.annotations.GenericGenerator;
 import softuni.winelovers.data.models.base.BaseEntity;
 import softuni.winelovers.data.models.wine.Wine;
+import softuni.winelovers.data.models.wine.WineComments;
 import softuni.winelovers.data.models.wine.WineNote;
 
 import javax.persistence.*;
@@ -46,6 +47,9 @@ public class User extends BaseEntity {
             inverseJoinColumns = { @JoinColumn(name = "wine_id") }
     )
     private List<Wine> wines;
+
+    @OneToMany(mappedBy = "user")
+    private List<WineComments> wineComments;
 
 
     public User() {
@@ -117,6 +121,14 @@ public class User extends BaseEntity {
 
     public void addWine(Wine wine){
         this.wines.add(wine);
+    }
+
+    public List<WineComments> getWineComments() {
+        return wineComments;
+    }
+
+    public void setWineComments(List<WineComments> wineComments) {
+        this.wineComments = wineComments;
     }
 
 }

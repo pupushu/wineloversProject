@@ -8,8 +8,7 @@ import softuni.winelovers.data.models.wine.Wine;
 import softuni.winelovers.data.models.wine.WineNote;
 import softuni.winelovers.data.repositories.wine.WineRepository;
 import softuni.winelovers.service.models.wines.CreateWineModelService;
-import softuni.winelovers.service.models.wines.GetWineNoteModelService;
-import softuni.winelovers.service.models.wines.GetWinesModelService;
+import softuni.winelovers.service.models.wines.GetWineModelService;
 import softuni.winelovers.service.services.ShopService;
 import softuni.winelovers.service.services.WineService;
 
@@ -41,17 +40,17 @@ public class WineServiceImpl implements WineService {
     }
 
     @Override
-    public List<GetWinesModelService> getAll() {
+    public List<GetWineModelService> getAll() {
         return this.wineRepository.findAll().stream()
-                .map(wine -> this.modelMapper.map(wine, GetWinesModelService.class))
+                .map(wine -> this.modelMapper.map(wine, GetWineModelService.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public GetWinesModelService findById(String id) throws Exception {
+    public GetWineModelService findById(String id) throws Exception {
         Optional<Wine> wine = this.wineRepository.findById(id);
         if (wine.isPresent()){
-            return this.modelMapper.map(wine.get(), GetWinesModelService.class);
+            return this.modelMapper.map(wine.get(), GetWineModelService.class);
         }else {
             throw new Exception("Invalid wine");
         }
@@ -59,7 +58,7 @@ public class WineServiceImpl implements WineService {
     }
 
     @Override
-    public void update(GetWinesModelService wine) {
+    public void update(GetWineModelService wine) {
         Wine wineToAdd = this.modelMapper.map(wine, Wine.class);
         wineToAdd.setWhereToBuy(null);
         List<Shop> shopList = wine.getWhereToBuy().stream()

@@ -2,12 +2,12 @@ package softuni.winelovers.service.models.user;
 
 import softuni.winelovers.data.models.user.UserRole;
 
-public class UserLoginServiceModel {
+public class UserLoginModelService {
     private String username;
     private String password;
     private UserRole role;
 
-    public UserLoginServiceModel() {
+    public UserLoginModelService() {
     }
 
     public String getUsername() {

@@ -6,18 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import softuni.winelovers.data.models.news.News;
-import softuni.winelovers.data.models.wine.Wine;
-import softuni.winelovers.data.models.wine.WineNote;
-import softuni.winelovers.service.models.user.UserLoginServiceModel;
 import softuni.winelovers.service.models.wines.CreateWineModelService;
-import softuni.winelovers.service.models.wines.GetWineNoteModelService;
-import softuni.winelovers.service.models.wines.GetWinesModelService;
+import softuni.winelovers.service.models.wines.GetWineModelService;
 import softuni.winelovers.service.services.ShopService;
 import softuni.winelovers.service.services.WineService;
-import softuni.winelovers.web.models.news.NewsCreateModel;
 import softuni.winelovers.web.models.shop.GetShopModel;
-import softuni.winelovers.web.models.users.LoginUserModel;
 import softuni.winelovers.web.models.wines.CreateWineModel;
 import softuni.winelovers.web.models.wines.CreateWineWineNotesModel;
 import softuni.winelovers.web.models.wines.GetWineModel;
@@ -118,7 +111,7 @@ public class WineController {
        wine.setWhereToBuy(shops);
         wine.setId(id);
         System.out.println();
-       this.wineService.update(this.modelMapper.map(wine, GetWinesModelService.class));
+       this.wineService.update(this.modelMapper.map(wine, GetWineModelService.class));
         return "wines/all-wines";
     }
 }

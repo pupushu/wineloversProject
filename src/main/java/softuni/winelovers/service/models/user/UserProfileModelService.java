@@ -1,16 +1,18 @@
 package softuni.winelovers.service.models.user;
 
-import softuni.winelovers.data.models.wine.WineNote;
+import softuni.winelovers.service.models.wines.GetWineModelService;
 
 import java.util.Date;
 import java.util.List;
 
-public class UserProfileServiceModel {
+public class UserProfileModelService {
     private String username;
     private Date dateRegistered;
     private String email;
+    private List<GetWineModelService> wines;
 
-    public UserProfileServiceModel() {
+
+    public UserProfileModelService() {
     }
 
     public String getUsername() {
@@ -35,5 +37,13 @@ public class UserProfileServiceModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<GetWineModelService> getWines() {
+        return wines;
+    }
+
+    public void setWines(List<GetWineModelService> wines) {
+        this.wines = wines;
     }
 }
